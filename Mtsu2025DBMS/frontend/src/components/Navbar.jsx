@@ -58,9 +58,11 @@ const Navbar = () => {
                 </Link>
                 <Button onClick={toggleColorMode}> {colorMode === "light" ? <IoMoon/> : <LuSun size="20"/>}
                 </Button>
-                <Button>
-                    <IoLogIn/> {/* Add login icon <Avitar/> for when logged in */}
-                </Button>
+                <Link to={"/login"}>
+                    <Button>
+                        <IoLogIn/> {/* Add login icon <Avitar/> for when logged in */}
+                    </Button>
+                </Link>
            </HStack>
 
         </Flex>
