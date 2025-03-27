@@ -1,3 +1,5 @@
 Mtsu2025DBMS/frontend/dist
 Mtsu2025DBMS/frontend/node_modules
 /Mtsu2025DBMS/node_modules
+
+.env
