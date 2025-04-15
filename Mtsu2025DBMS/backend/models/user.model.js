@@ -1,11 +1,6 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
-    user_id: {
-        type: String,
-        required: true,
-        unique: true
-    },
     first_name: {
         type: String,
         required: true
@@ -33,6 +28,5 @@ const userSchema = new mongoose.Schema({
     timestamps: true //created at, updated at
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('LoginInfo', userSchema);
 export default User;
-// module.exports = User;

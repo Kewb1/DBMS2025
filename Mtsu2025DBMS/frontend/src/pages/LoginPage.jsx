@@ -1,16 +1,49 @@
-import { Box, Button, useColorModeValue, Container, Heading, Input, InputGroup, InputRightElement, VStack } from '@chakra-ui/react'
-import {React, useState} from 'react'
+import { Box, Link, useToast, Button, useColorModeValue, Container, Heading, Input, InputGroup, InputRightElement, VStack } from '@chakra-ui/react'
+import {React, useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useUserStore } from '../store/user';
 
 const LoginPage = () => {
+
+  const {loginUser, fetchUsers} = useUserStore();
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchUsers();
+      console.log("Fetching Users");
+      console.log(useUserStore.getState().users);
+    };
+    fetchData();
+  }, []);
+
   const [newLogin, setLogin] = useState(
     {
-      username: "",
+      email: "",
       password: "",
     }
   )
 
-  const handleLogin = () => {
+  const navigate = useNavigate(); // Initialize navigate function
+
+
+  const toast = useToast();
+
+  const handleLogin = async () => {
+    console.log("Logging in:");
     console.log(newLogin);
+    const {success, message} = await loginUser(newLogin);
+    console.log("Login response: ", message);
+
+    if (success) {
+      navigate('/'); // Redirect to the homepage
+    } else {
+      toast({
+        title: "Error",
+        description: message,
+        status: "error",
+        isClosable: true,
+      });
+      console.log("Login failed:", message);
+    }
   };
 
   const [show, setShow] = useState(false);
@@ -29,10 +62,10 @@ const LoginPage = () => {
         p={6} rounded={"lg"} shadow={"md"}>
           <VStack spacing={4}>
 
-            <Input placeholder='Username or email'
-            name='username'
-            value={newLogin.username}
-            onChange={(e) => setLogin({...newLogin, username:e.target.value})} />
+            <Input placeholder='Email'
+            name='email'
+            value={newLogin.email}
+            onChange={(e) => setLogin({...newLogin, email:e.target.value})} />
 
             {/* <Input placeholder='Enter password'
             name='password'
@@ -61,6 +94,14 @@ const LoginPage = () => {
             w='full'>
               Sign in
             </Button>
+
+            <Link to={"/"}>
+              <Button onClick={() => {
+                navigate('/register');
+              }}>
+                Create an account
+              </Button>
+            </Link>
           </VStack>
         </Box>
 

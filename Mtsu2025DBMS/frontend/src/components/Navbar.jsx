@@ -6,6 +6,7 @@ import {IoMoon} from 'react-icons/io5'
 import {LuSun} from 'react-icons/lu'
 import { useState } from 'react'
 import { useRecipeStore } from '../store/recipe' // Adjust path as needed
+import { useUserStore } from '../store/user';
 import { Avatar } from '@chakra-ui/react';
 import { IoLogIn} from 'react-icons/io5';
 import { useColorModeValue } from '@chakra-ui/react';
@@ -16,6 +17,7 @@ const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const {searchRecipes} = useRecipeStore();
+  const {currentUser, logoutUser} = useUserStore();
 
   const handleSearchRecipe = async(searchTerm) => {
         console.log("Search Term", searchTerm);
@@ -58,11 +60,24 @@ const Navbar = () => {
                 </Link>
                 <Button onClick={toggleColorMode}> {colorMode === "light" ? <IoMoon/> : <LuSun size="20"/>}
                 </Button>
-                <Link to={"/login"}>
+                {currentUser == null && (
+                    <Link to={"/login"}>
                     <Button>
                         <IoLogIn/> {/* Add login icon <Avitar/> for when logged in */}
                     </Button>
-                </Link>
+                    </Link>
+                )}
+                {currentUser != null && (
+                    <Button
+                    onClick ={() => {
+                        logoutUser();
+                        window.location.reload(); // Refresh the page to reflect the logout
+                    }}
+                    colorScheme={"red"}>
+                        <PlusSquareIcon fontSize={20}/>
+                    </Button>
+                )}
+                
            </HStack>
 
         </Flex>
