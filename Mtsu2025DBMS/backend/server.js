@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import path from "path";
 import { connectDB } from "./config/db.js"; 
 import recipeRoutes from "./routes/recipe.route.js";
+import userRoutes from "./routes/user.route.js";
 
 dotenv.config();
 
@@ -13,7 +14,8 @@ const __dirname = path.resolve();
 
 app.use(express.json()); //allows us to accept data in the req.body
 
-app.use("/api/recipes", recipeRoutes)
+app.use("/api/recipes", recipeRoutes);
+app.use("/api/users", userRoutes);
 
 if(process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "/frontend/dist")));
