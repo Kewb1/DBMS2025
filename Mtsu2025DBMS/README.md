@@ -20,9 +20,13 @@ Development Tools: Postman(API building aid), vite(Front-end), chakra(Front-end 
 
 -To gain access to the mongo databases, please message the devs for the URI keys, we also will instruct you on how to set up the .env files.-
 
+
 Clone/Download the project
+
 Navigate to your Mtsu2025DBMS folder
+
 Next in the terminal enter "npm run build"
+
 Then in the terminal enter "npm run start"
 
 To view application, go to (http://localhost:5000)
