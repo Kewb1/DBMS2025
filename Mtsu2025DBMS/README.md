@@ -13,6 +13,7 @@ React - Frontend
 Development Tools: Postman(API building aid), vite(Front-end), chakra(Front-end library)
 
 -----TO RUN------
+
 !! IMPORTANT NOTE!!
 -THIS APPLICATION CAN ONLY RUN IN A VS CODE TERMINAL-
 -To gain access to the mongo databases, please message the devs for the URI keys, we also will instruct you on how to set up the .env files.-
